@@ -90,13 +90,23 @@ h4{
 }
 
 .fake{
-  background: #FFF7F7;
+  background: #EBFFF8;
   border: 1px solid #F97777;
 }
 
 .true{
   background: #DBF6ED;
   border: 1px solid #49D2A7;
+}
+
+.misleading{
+  background: #FDB76C;
+  border: 1px solid #FFF4E8;
+}
+
+.dontknow{
+  background: #F1F4F5;
+  border: 1px solid #7397A0;
 }
 
 .text-dark-red{
