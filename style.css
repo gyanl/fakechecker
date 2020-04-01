@@ -169,7 +169,16 @@ a.alert.weblink:visited{
   border: 1px solid #82AE61;
   border-radius: 8px;
   padding: 4px 20px 8px 24px;
-  margin: 16px 20px 16px 20px;
+  margin: 16px 20px 8px 20px;
+}
+
+.whatsapp-image{
+  border-radius: 8px;
+  margin: 4px 20px 4px 20px;
+  max-width: 80%;
+  background: #E0F9CD;
+  padding: 4px;
+  border: 1px solid #82AE61;
 }
 
 .message-preview{
