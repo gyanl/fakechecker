@@ -17,9 +17,8 @@
 
 
   <center>
-    <div class="status-tile bg-misleading">
-      <span id="verification-status">123</span>
-      <i class="icon16" data-feather="info"></i>
+    <div class="status-tile misleading">
+      <i class="icon20" data-feather="info"></i><span id="verification-status">Misleading</span>
     </div>
   </center>
 
@@ -33,11 +32,10 @@
 
 
   <div class="post-container">
-    <p id="post-text">...</p>
+    <p id="post-text" class="limited">...</p>
 
-    <p>
-      <a id="expandPost" onclick="" class="whatsapp-button noselect"><i class="icon20" data-feather="maximize-2"></i>Expand</a>
-      <a id="showVariants" onclick="" class="whatsapp-button noselect"><i class="icon20" data-feather="layers"></i>3 Variants</a>
+      <a id="expandPost" onclick="expandPost()" class="button noselect"><i class="icon20" data-feather="maximize-2"></i><span id="readMoreText">Read</span></a>
+      <a id="showVariants" onclick="" class="button noselect"><i class="icon20" data-feather="layers"></i>3 Variants</a>
 
   </div>
 
@@ -53,21 +51,21 @@
   <a id="link" class="alert weblink">
     <img class="icon20" src="img/web.png">
     <span id="link-title">...</span>
-    <div id="link-source" class="smaller opacity50 smallcaps">...</div>
+    <div class="smaller opacity50 smallcaps"><span id="link-source">...</span><i class="icon16" data-feather="chevron-right"></i></div>
   </a>
 
 
 
   <div class="spaced">
-    <a class="whatsapp-button noselect"
+    <a class="button noselect"
       href="whatsapp://send?text=*This message is fake!* There is no evidence of a NASA SD13 wave detector, there's no confirmation from NASA to show that the 5PM clapping did anything to show that the Coronavirus is retreating in India. The number of daily Coronavirus cases are only rising in India, and are expected to rise sharply in the coming days. All of us here in India need to exercise sound personal judgement and stay safe indoors as much as possible. Read more at www.gyanl.com/fakechecker/nasa-covid"
       data-action="share/whatsapp/share"><i class="icon20" data-feather="share-2"></i>Share on WhatsApp</a>
 
-    <a id="copyButton" onclick="copyText()" class="whatsapp-button noselect"><i class="icon20" data-feather="copy"></i>Copy</a>
+    <a id="copyButton" onclick="copyText()" class="button noselect"><i class="icon20" data-feather="copy"></i><span id="copyButtonText">Copy</span></a>
 
-    <a id="editFactcheckButton" onclick="" class="whatsapp-button noselect"><i class="icon20" data-feather="edit"></i>Edit Factcheck</a>
+    <a id="editFactcheckButton" onclick="" class="button noselect"><i class="icon20" data-feather="edit"></i>Improve</a>
 
-    <a id="revisionHistoryButton" onclick="" class="whatsapp-button noselect"><i class="icon20" data-feather="clock"></i>Revision History</a>
+    <a id="revisionHistoryButton" onclick="" class="button noselect"><i class="icon20" data-feather="clock"></i>History</a>
 
   </div>
 
@@ -111,7 +109,7 @@
   <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-database.js"></script>
 
   <script>
-    console.log("tatti");
+
     // Your web app's Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyD30YcwE_5f3rO2QRC25kQ5rEbeWz5zj9Y",
@@ -169,5 +167,3 @@ getStatus();
 </body>
 
 </html>
-
-firebase.database().ref('posts/0/post_summary')

@@ -1,3 +1,12 @@
+function expandPost() {
+  if (document.getElementById("post-text").classList.contains("limited")) {
+    document.getElementById("readMoreText").innerHTML = "Read less";
+  } else {
+    document.getElementById("readMoreText").innerHTML = "Read more";
+  }
+  document.getElementById("post-text").classList.toggle("limited");
+}
+
 function copyText() {
   /* Get the text field */
   var copyText = document.getElementById("response");
@@ -10,7 +19,7 @@ function copyText() {
   document.execCommand("copy");
 
   /* Alert the copied text */
-  document.getElementById("copyButton").innerHTML = "Copied!";
+  document.getElementById("copyButtonText").innerHTML = "Copied!";
 }
 
-feather.replace()
+feather.replace();
