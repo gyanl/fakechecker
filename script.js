@@ -12,3 +12,5 @@ function copyText() {
   /* Alert the copied text */
   document.getElementById("copyButton").innerHTML = "Copied!";
 }
+
+feather.replace()

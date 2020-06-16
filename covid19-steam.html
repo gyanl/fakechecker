@@ -1,0 +1,150 @@
+<html>
+
+<head>
+  <title>Fake Checker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta name="theme-color" content="#F97777">
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+
+  <div class="header bg-header">
+    <a href="https://gyanl.com/fakechecker" class="header-text"><img class="header-logo" src="fclogo.svg"></a>
+    <input type="search" class="search" value="Search" onfocus="this.value=''" onblur="this.value='Search'"></input>
+  </div>
+
+
+  <center>
+    <div class="status-tile bg-misleading">
+      Misleading
+      <i class="icon16" data-feather="info"></i>
+    </div>
+  </center>
+
+  <div class="claim spaced">
+    Novel coronavirus can be killed by inhaling steam.
+  </div>
+
+  <div class="reported">
+    Reported 36 times since 12 June 2020
+  </div>
+
+
+  <div class="post-container">
+    <p><b>NASA</b> satellite videos LIVE telecast have shown that the coronavirus is retreating in India thanks to the people's efforts at 5PM on 22 Mar ..
+    <p>The cosmic level sound waves generated have been detected by NASA's <b>SD13</b> wave detector and a recently made bio-satellite has shown COVID-19 strain diminishing and weakening!!!
+    <p><b><i>BIG THANKS TO EVERYONE FOR MAKING THIS A SUCCESS</i></b>
+      <br><b>Proud to be an Indian</b>
+      <br>👏🏽👏🏽👏🏽👏🏽👏🏽
+      <br>Jai Hind 🇮🇳🇮🇳🇮🇳
+
+    <p>
+      <a id="expandPost" onclick="" class="whatsapp-button noselect"><i class="icon20" data-feather="maximize-2"></i>Expand</a>
+      <a id="showVariants" onclick="" class="whatsapp-button noselect"><i class="icon20" data-feather="layers"></i>3 Variants</a>
+
+  </div>
+
+  <h3 class="spaced">Factcheck</h3>
+  <p class="spaced">This message is fake! There is no evidence of a NASA SD13 wave detector, there's no confirmation from NASA to show that the 5PM clapping did anything to show that the Coronavirus is retreating in India. The number of daily
+    Coronavirus cases are only rising in India, and are expected to rise sharply in the coming days. All of us here in India need to exercise sound personal judgement and stay safe indoors as much as possible.</p>
+
+
+  <textarea id="response">
+This message is fake! There is no evidence of a NASA SD13 wave detector, there's no confirmation from NASA to show that the 5PM clapping did anything to show that the Coronavirus is retreating in India. The number of daily Coronavirus cases are only rising in India, and are expected to rise sharply in the coming days. All of us here in India need to exercise sound personal judgement and stay safe indoors as much as possible.
+Read more at www.gyanl.com/fakechecker/nasa-covid
+  </textarea>
+
+
+  <a href="https://www.indiatimes.com/technology/science-and-future/this-is-fake-nasa-satellite-hasnt-shown-coronavirus-retreat-in-india-please-stay-safe-509003.html" class="alert weblink">
+    <img class="icon20" src="img/web.png">
+    NASA Satellite Hasn't Shown Coronavirus Retreat In India, Please Stay Safe
+    <div class="smaller opacity50 smallcaps">Indiatimes.com</div>
+  </a>
+
+
+
+  <div class="spaced">
+    <a class="whatsapp-button noselect"
+      href="whatsapp://send?text=*This message is fake!* There is no evidence of a NASA SD13 wave detector, there's no confirmation from NASA to show that the 5PM clapping did anything to show that the Coronavirus is retreating in India. The number of daily Coronavirus cases are only rising in India, and are expected to rise sharply in the coming days. All of us here in India need to exercise sound personal judgement and stay safe indoors as much as possible. Read more at www.gyanl.com/fakechecker/nasa-covid"
+      data-action="share/whatsapp/share"><i class="icon20" data-feather="share-2"></i>Share on WhatsApp</a>
+
+    <a id="copyButton" onclick="copyText()" class="whatsapp-button noselect"><i class="icon20" data-feather="copy"></i>Copy</a>
+
+    <a id="editFactcheckButton" onclick="" class="whatsapp-button noselect"><i class="icon20" data-feather="edit"></i>Edit Factcheck</a>
+
+    <a id="revisionHistoryButton" onclick="" class="whatsapp-button noselect"><i class="icon20" data-feather="clock"></i>Revision History</a>
+
+  </div>
+
+
+  <div class="comment-section">
+    <h3 class="spaced">Comments</h3>
+
+    <div class="comment-container spaced">
+      People die because the symptoms are so extreme. If relieved the body fights off the disease. I have first hand experience from the period between Jan 30 and March 22.
+      <div class="comment-metadata">
+        rishabh • 8m ago
+      </div>
+    </div>
+
+    <div class="comment-container spaced">
+      People die because the symptoms are so extreme. If relieved the body fights off the disease. I have first hand experience from the period between Jan 30 and March 22.
+      <div class="comment-metadata">
+        rishabh • 8m ago
+      </div>
+    </div>
+
+    <div class="comment-container spaced">
+      People die because the symptoms are so extreme. If relieved the body fights off the disease. I have first hand experience from the period between Jan 30 and March 22.
+      <div class="comment-metadata">
+        rishabh • 8m ago
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Made with love by Gyan
+  </footer>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-database.js"></script>
+
+  <script>
+    console.log("tatti");
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyD30YcwE_5f3rO2QRC25kQ5rEbeWz5zj9Y",
+      authDomain: "fakechecker-bf9fb.firebaseapp.com",
+      databaseURL: "https://fakechecker-bf9fb.firebaseio.com",
+      projectId: "fakechecker-bf9fb",
+      storageBucket: "fakechecker-bf9fb.appspot.com",
+      messagingSenderId: "76875907987",
+      appId: "1:76875907987:web:76fc66053bedbf98e65e66",
+      measurementId: "G-80X57EVT25"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    var database = firebase.database();
+   
+    const ref = firebase.database().ref('posts/0/post_summary');
+ref.on('value', (snapshot) => {
+  const value = snapshot.val();
+    console.log(value);
+});
+  </script>
+
+
+  <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>
