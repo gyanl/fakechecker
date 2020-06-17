@@ -36,127 +36,111 @@
     <div class="comment-section">
 
         <center>
-            <h3 class="spaced">Have a few minutes?</h3>
-            <p class="spaced">Help us fact-check some of these claims.</p>
+            <h3 class="spaced">All submitted posts</h3>
+            <p class="spaced">Click to see more details.</p>
             <p></p>
         </center>
 
         <div id="allPostContainer">
 
-            <a href="post.html?0">
-                <div class="home-post-container">
-                    <div class="spaced home-status"><i class="icon20" data-feather="help-circle"></i>Currently unverified</div>
-                    <div class="home-reported"> Reported 1 times since 17 June 2020.</div>
-                    <p class="limited">April 5th is Vamana Dwadashi. On that day, the earth gets maximum light from Sun and this empowers disease causing viruses. The virus is a evil entity and it thrives in darkness. According to Adiyogi Purana, one way to destroy such
-                        evil entities is to focus light on it, like we do with magnifying glass and sun's rays. It's towards this that the Prime Minister has asked for us to switch off all lights in our house (too bright), and use a focused, small light
-                        to show our support. The small focus of all our candles, diyas etc will focus into a powerful beam and strike at the heart of the coronavirus so that we can all celebrate the true Ram Navami a few days later to the scheduled date.
-                        Unlike earlier attempts, this is not a masterstroke from our PM. This is a masterbeam!</p>
-                    <a onclick="voteTrue()" class="button green"><i class="icon20" data-feather="thumbs-up"></i>True</a>
-                    <a onclick="voteFalse()" class="button red"><i class="icon20" data-feather="thumbs-down"></i>False</a>
-
-                </div>
-            </a>
-
         </div>
 
-    </div>
+        <footer>
+            <img class="header-logo" src="fclogo-white.svg">
+            <p><a href="about.html">About Fakechecker</a></p>
+            <p><a href="about.html">Community Guidelines</a></p>
+            <p><a href="about.html">Rules for editing</a></p>
+        </footer>
 
-    <footer>
-        <img class="header-logo" src="fclogo-white.svg">
-        <p><a href="about.html">About Fakechecker</a></p>
-        <p><a href="about.html">Community Guidelines</a></p>
-        <p><a href="about.html">Rules for editing</a></p>
-    </footer>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
+        <!-- TODO: Add SDKs for Firebase products that you want to use
    https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-database.js"></script>
 
-    <script>
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyD30YcwE_5f3rO2QRC25kQ5rEbeWz5zj9Y",
-            authDomain: "fakechecker-bf9fb.firebaseapp.com",
-            databaseURL: "https://fakechecker-bf9fb.firebaseio.com",
-            projectId: "fakechecker-bf9fb",
-            storageBucket: "fakechecker-bf9fb.appspot.com",
-            messagingSenderId: "76875907987",
-            appId: "1:76875907987:web:76fc66053bedbf98e65e66",
-            measurementId: "G-80X57EVT25"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
+        <script>
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyD30YcwE_5f3rO2QRC25kQ5rEbeWz5zj9Y",
+                authDomain: "fakechecker-bf9fb.firebaseapp.com",
+                databaseURL: "https://fakechecker-bf9fb.firebaseio.com",
+                projectId: "fakechecker-bf9fb",
+                storageBucket: "fakechecker-bf9fb.appspot.com",
+                messagingSenderId: "76875907987",
+                appId: "1:76875907987:web:76fc66053bedbf98e65e66",
+                measurementId: "G-80X57EVT25"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
 
-        var database = firebase.database();
+            var database = firebase.database();
 
-        var numPosts = 0;
+            var numPosts = 0;
 
-        const ref = firebase.database().ref('posts');
-        ref.on('value', (snapshot) => {
-            var posts = snapshot.val();
-            numPosts = posts.length;
+            const ref = firebase.database().ref('posts');
+            ref.on('value', (snapshot) => {
+                var posts = snapshot.val();
+                numPosts = posts.length;
 
-            document.getElementById('allPostContainer').innerHTML = '';
+                // document.getElementById('allPostContainer').innerHTML = '';
 
 
-            console.log(numPosts);
-            for (var i = 0; i < posts.length; i++) {
+                console.log(numPosts);
+                for (var i = 0; i < posts.length; i++) {
 
-                var thisSummary = '';
-                if (posts[i].post_summary) {
-                    thisSummary = posts[i].post_summary;
-                } else {
-                    thisSummary = "No summary"
+                    var thisSummary = '';
+                    if (posts[i].post_summary) {
+                        thisSummary = posts[i].post_summary;
+                    } else {
+                        thisSummary = "No summary"
+                    }
+
+                    var thisCode = "<a href='post.html?" +
+                        i +
+                        "'><div class='home-post-container'><div class='claim spaced'>" +
+                        thisSummary +
+                        "</div><div class='reported'> Reported " +
+                        posts[i].report_count +
+                        " times since " +
+                        posts[i].first_report +
+                        ".</div><p class='limited'>" +
+                        posts[i].post_text +
+                        "</div>"
+
+                    document.getElementById('allPostContainer').innerHTML += thisCode;
                 }
+            });
 
-                var thisCode = "<a href='post.html?" +
-                    i +
-                    "'><div class='home-post-container'><div class='claim spaced'>" +
-                    thisSummary +
-                    "</div><div class='reported'> Reported " +
-                    posts[i].report_count +
-                    " times since " +
-                    posts[i].first_report +
-                    ".</div><p class='limited'>" +
-                    posts[i].post_text +
-                    "</div>"
+            function submitNewPost() {
 
-                document.getElementById('allPostContainer').innerHTML += thisCode;
+                var today = new Date();
+                var month = today.toLocaleString('default', {
+                    month: 'long'
+                });
+                var date = today.getDate() + ' ' + month + ' ' + today.getFullYear();
+
+                firebase.database().ref('posts/' + numPosts).update({
+                    post_text: document.getElementById("new-post").value,
+                    first_report: date,
+                    report_count: "1"
+
+                }, function(error) {
+                    if (error) {
+                        console.log("New Post failed failed...");
+                    } else {
+                        console.log("Posted :)");
+                    }
+                });
+
+                window.location.href = '/fakechecker/post.html?' + (numPosts - 1);
             }
-        });
-
-        function submitNewPost() {
-
-            var today = new Date();
-            var month = today.toLocaleString('default', {
-                month: 'long'
-            });
-            var date = today.getDate() + ' ' + month + ' ' + today.getFullYear();
-
-            firebase.database().ref('posts/' + numPosts).update({
-                post_text: document.getElementById("new-post").value,
-                first_report: date,
-                report_count: "1"
-
-            }, function(error) {
-                if (error) {
-                    console.log("New Post failed failed...");
-                } else {
-                    console.log("Posted :)");
-                }
-            });
-
-            window.location.href = '/fakechecker/post.html?' + (numPosts - 1);
-        }
-    </script>
+        </script>
 
 
-    <script type="text/javascript" src="script.js"></script>
+        <script type="text/javascript" src="script.js"></script>
 </body>
 
 </html>

@@ -148,6 +148,9 @@ input[type="search"] {
 #alert {
     margin-top: 20px;
     opacity: .75;
+    background: #ffffff;
+    padding: 12px;
+    border-radius: 4px;
 }
 
 
@@ -268,20 +271,28 @@ a.alert.weblink:visited {
 }
 
 #allPostContainer {
-    padding: 0 10%;
+    margin: 0 5%;
 }
 
 .home-post-container {
     display: inline-block;
-    max-width: 400px;
-    margin: 8px 12px;
+    vertical-align: top;
+    max-width: 25%;
+    margin: 8px 1%;
     background: #ffffff;
     color: #2a3134;
-    /* Dark 25% */
     border: 0.5px solid rgba(10, 48, 65, 0.25);
     box-shadow: 0px 0px 4px rgba(70, 136, 241, 0.2);
     border-radius: 4px;
     padding: 8px 20px;
+}
+
+#addFactCheckButton {
+    display: none;
+}
+
+#alert {
+    display: none;
 }
 
 .limited {
@@ -345,31 +356,67 @@ a.alert.weblink:visited {
     display: inline-block;
 }
 
-.home-status {
+.status-unverified {
+    padding-top: 4px;
+    font-weight: 700;
     color: #595d7b;
     text-align: left;
 }
 
-.home- reported {
+.status-false {
+    padding-top: 4px;
+    font-weight: 700;
+    color: #FF726D;
+    text-align: left;
+}
+
+.status-true {
+    padding-top: 4px;
+    font-weight: 700;
+    color: #2CA782;
+    text-align: left;
+}
+
+.home-reported {
     font-size: 14px;
     line-height: 24px;
     text-align: left;
     letter-spacing: 0.2px;
-    color: #595d7b;
+    color: #7A7D95;
     opacity: 0.75;
-    padding-bottom: 4px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
 }
 
 .green {
-    color: #2CA782;
-    background: #D9F7EE;
+    color: #7A7D95;
+    background: #F8F8FF;
     border-radius: 12px;
 }
 
+.green:hover {
+    color: #2CA782;
+    background: #D9F7EE;
+}
+
 .red {
+    color: #7A7D95;
+    background: #F8F8FF;
+    border-radius: 12px;
+}
+
+.red:hover {
     color: #FF726D;
     background: #FFEFEF;
-    border-radius: 12px;
+}
+
+.moredetails {
+    font-weight: 500;
+    right: 0;
+    color: #A2A4B5;
+    display: inline-block;
+    margin-top: -6px;
+    margin-bottom: 12px;
 }
 
 .button:active {
@@ -395,7 +442,6 @@ a.alert.weblink:visited {
 .comment-section {
     background: #ffffff;
     border-top: 1px solid #c1d3d9;
-    padding-bottom: 40px;
 }
 
 .comment-container {
@@ -453,6 +499,7 @@ a.alert.weblink:visited {
 }
 
 footer {
+    margin-top: 40px;
     background: #595D7B;
     color: #D5D7DE;
     padding: 32px 24px 20px 24px;
@@ -489,6 +536,8 @@ footer a {
     }
     #allPostContainer {
         padding: 0;
+        vertical-align: top;
+        margin: auto;
     }
     .home-post-container {
         max-width: auto;

@@ -9,17 +9,23 @@
 
 <body id="page">
 
+
+
     <div class="header bg-header">
         <a href="index.html" class="header-text"><img class="header-logo" src="fclogo.svg"></a>
         <input type="search" class="search" value="Search" onfocus="this.value=''" onblur="this.value='Search'"></input>
     </div>
 
+    <div id="alert" class="spaced"></div>
 
-    <center>
+    <!-- <center>
         <div class="status-tile fabricated">
             <i class="icon20" data-feather="info"></i><span id="verification-status">False</span>
         </div>
-    </center>
+
+        <div onclick="voteTrue()" class="button green"><i class="icon20" data-feather="thumbs-up"></i>True</div>
+        <div onclick="voteFalse()" class="button red"><i class="icon20" data-feather="thumbs-down"></i>False</div>
+    </center> -->
 
     <div class="claim spaced">
         <span onclick="this.contentEditable = 'true'; this.classList.add('comment-box')" onblur="setSummary();this.classList.remove('comment-box') " id="post-summary"></span>
@@ -34,11 +40,9 @@
         <p id="post-text" class="limited">...</p>
 
         <a id="expandPost" onclick="expandPost()" class="button noselect"><i class="icon20" data-feather="maximize-2"></i><span id="readMoreText">Read more</span></a>
-        <a id="showVariants" onclick="" class="button noselect"><i class="icon20" data-feather="layers"></i>3 Variants</a>
+        <!-- <a id="showVariants" onclick="" class="button noselect"><i class="icon20" data-feather="layers"></i>3 Variants</a> -->
 
     </div>
-
-    <div id="alert" class="spaced"></div>
 
     <div id="improve" class="spaced">
         <h3>Edit Factcheck</h3>
@@ -46,7 +50,7 @@
             <p class="no-top-margin">Fact-checks should explain why the information in the post is true or false in simple terms. You can provide a link to other resources like fact-checking sites, news sites, or published research for further reading. </p>
 
             <div class="improve-label">Factcheck</div>
-            <textarea class="comment-box" placeholder="Why is this information true or false?" name="textinput-factcheck" id="edit-factcheck" cols="30" rows="10"></textarea><br>
+            <textarea class="comment-box" placeholder="Why is this information true or false?" name="textinput-factcheck" id="edit-factcheck" cols="30" rows="8"></textarea><br>
 
             <div class="improve-label">Source Link</div>
             <input class="comment-box" placeholder="Link to a news website or other source." type="text" name="textinput-factcheck-link" id="edit-factcheck-link"><br>
@@ -82,12 +86,13 @@
 
 
         <div class="spaced">
-            <a class="button noselect" href="whatsapp://send?text=*This message is fake!* There is no evidence of a NASA SD13 wave detector, there's no confirmation from NASA to show that the 5PM clapping did anything to show that the Coronavirus is retreating in India. The number of daily Coronavirus cases are only rising in India, and are expected to rise sharply in the coming days. All of us here in India need to exercise sound personal judgement and stay safe indoors as much as possible. Read more at www.gyanl.com/fakechecker/nasa-covid"
+            <a id="whatsappButton" class="button noselect" href="whatsapp://send?text=*This message is fake!* There is no evidence of a NASA SD13 wave detector, there's no confirmation from NASA to show that the 5PM clapping did anything to show that the Coronavirus is retreating in India. The number of daily Coronavirus cases are only rising in India, and are expected to rise sharply in the coming days. All of us here in India need to exercise sound personal judgement and stay safe indoors as much as possible. Read more at www.gyanl.com/fakechecker/nasa-covid"
                 data-action="share/whatsapp/share"><i class="icon20" data-feather="share-2"></i>Share on WhatsApp</a>
 
             <a id="copyButton" onclick="copyText()" class="button noselect"><i class="icon20" data-feather="copy"></i><span id="copyButtonText">Copy</span></a>
 
             <a id="editFactcheckButton" onclick="showImprove()" class="button noselect"><i class="icon20" data-feather="edit"></i>Edit</a>
+            <a id="addFactcheckButton" onclick="showImprove()" class="button noselect"><i class="icon20" data-feather="edit"></i>Add Factcheck</a>
 
             <!-- <a id="revisionHistoryButton" onclick="" class="button noselect"><i class="icon20" data-feather="clock"></i>History</a> -->
 
@@ -198,11 +203,18 @@
                 if (snapshot.val().post_factcheck) {
                     document.getElementById("post-factcheck").innerHTML = snapshot.val().post_factcheck;
                     document.getElementById("edit-factcheck").value = snapshot.val().post_factcheck;
+                    document.getElementById("addFactcheckButton").style.display = "none";
+                    document.getElementById("editFactcheckButton").style.display = "inline-block";
+                    document.getElementById("copyButton").style.display = "inline-block";
+                    document.getElementById("whatsappButton").style.display = "inline-block";
                 } else {
-                    document.getElementById("post-factcheck").innerHTML = "No fact-check available. Click the edit button to add information."
-
-                    document.getElementById("alert").innerHTML = "Thank you for reporting this information. We have added it to our database. <p>There is no fact-check currently available, so you can help others by adding a fact-check below, or check in later to see if someone else has added information."
-                    showImprove();
+                    document.getElementById("post-factcheck").innerHTML = "There is no fact-check available right now."
+                    document.getElementById("alert").style.display = "block";
+                    document.getElementById("alert").innerHTML = "<div class='improve-label'>No factcheck available.</div>We could not find any matches, so a new page has been created."
+                    document.getElementById("addFactcheckButton").style.display = "inline-block";
+                    document.getElementById("editFactcheckButton").style.display = "none";
+                    document.getElementById("copyButton").style.display = "none";
+                    document.getElementById("whatsappButton").style.display = "none";
                 }
 
                 document.getElementById("link-title").innerHTML = snapshot.val().link_title;
