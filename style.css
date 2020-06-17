@@ -540,7 +540,7 @@ footer a {
         margin: auto;
     }
     .home-post-container {
-        max-width: auto;
+        max-width: 100%;
         margin: 0px 5% 16px 5%;
     }
     .weblink {
