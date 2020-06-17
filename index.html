@@ -1,112 +1,141 @@
 <html>
 
 <head>
-<title>Fake Checker</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="style.css">
-<meta name="theme-color" content="#49B8D2">
+    <title>Fake Checker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 
 <body>
 
-<div class="header bg-blue">
-  <a href="https://gyanl.com/fakechecker" class="header-text"><img class="icon24" src="img/dontknow.png">Fake Checker</a>
-  <!-- <input type="search" class="search" value="Search"></input> -->
-</div>
-
-<img class="headerimg" src="img/header.jpg" alt="">
-
-<div class="spaced">
-<h1>Not everything you read on WhatsApp is true.</h1>
-<p class="no-top-margin">Forward any message to Fake Checker and you will automatically get a response about whether the message is true, false or misleading.</p>
-<a class="whatsapp-button" href="https://wa.me/917982121546?text=Send%20any%20message%20to%20this%20number%20to%20enable%20Fake%20Checker%20service.">Try it now!</a>
-</div>
-<p></p>
-<div class="comment-section">
-
-<h4>Recent Messages</h4><p></p>
-
-<div class="whatsapp-message">
-  <div class="alert-inside fake">
-    <div class="text-dark-red bold">
-      <img class="icon20" src="img/false-color.png">This message is fake.
+    <div class="header bg-header">
+        <a href="index.html" class="header-text"><img class="header-logo" src="fclogo.svg"></a>
+        <input type="search" class="search" value="Search" onfocus="this.value=''" onblur="this.value='Search'"></input>
     </div>
-    <div class="opacity60 smaller">
-      1 report since 1 April 2020.
+
+    <div class="landing">
+
+        <img class="headerimg" src="img/header.jpg" alt="">
+
+        <div class="landing-text spaced">
+            <h3>Not everything you read on the internet is true.</h3>
+            <p class="no-top-margin">Fakechecker is a crowdsourced fact-checking initiative. Paste in a forwarded message or upload a media file to check if it's true.</p>
+            <p>If we don’t have any information about it, you can help others by adding some information about it and our community will fact-check it.</p>
+
+            <div class="improve-label">Saw a suspicious message or post? Paste it here!</div>
+            <textarea class="comment-box" name="textinput-newpost" onfocus="this.value=''" id="new-post" cols="30" rows="5">Paste a message or post</textarea><br>
+            <a id="" onclick="submitNewPost()" class="button"><i class="icon20" data-feather="search"></i>Submit & Search</a>
+
+            <p>You can also forward a message to us on WhatsApp and you will automatically get a factcheck on the message.</p>
+            <a class="button" href="https://wa.me/917982121546?text=Send%20any%20message%20to%20this%20number%20to%20enable%20Fake%20Checker%20service."><i class="icon20" data-feather="message-circle"></i>Use on WhatsApp</a>
+        </div>
+
     </div>
-  </div>
+    <p></p>
+    <div class="comment-section">
 
-  <div class="message-preview">
-    <p>People in Italy have thrown all of their money on the roads outside saying that this money is useless to save them from death. If you are well off spend this for the service and help of the needy.lesson for humanity.</p>
-  </div>
+        <h3 class="spaced">Have a few minutes? Help us fact-check some of these claims.</h3>
+        <p></p>
 
-  <a href="money-streets.html" class="whatsapp-button">See more</a>
+        <div id="allPostContainer">
 
-</div>
+        </div>
 
-<div class="whatsapp-message">
-  <div class="alert-inside fake">
-    <div class="text-dark-red bold">
-      <img class="icon20" src="img/false-color.png">This message is fake.
+        <div class="whatsapp-message">
+            <div class="alert-inside fake">
+                <div class="text-dark-red bold">
+                    <img class="icon20" src="img/false-color.png">This message is fake.
+                </div>
+                <div class="opacity60 smaller">
+                    1 report since 1 April 2020.
+                </div>
+            </div>
+
+            <div class="message-preview">
+                <p>People in Italy have thrown all of their money on the roads outside saying that this money is useless to save them from death. If you are well off spend this for the service and help of the needy.lesson for humanity.</p>
+            </div>
+
+            <a href="money-streets.html" class="whatsapp-button">See more</a>
+
+        </div>
+
+
+
+        <div class="post-container">
+            <div class="claim spaced">
+                <span id="post-summary"></span>
+            </div>
+
+            <div class="reported">
+                Reported <span id="report-count">0</span> times since <span id="first-report">1 January 2020</span>.
+            </div>
+            <p id="post-text" class="limited">...</p>
+
+            <a id="expandPost" onclick="expandPost()" class="button noselect"><i class="icon20" data-feather="maximize-2"></i><span id="readMoreText">Read more</span></a>
+        </div>
+
     </div>
-    <div class="opacity60 smaller">
-      1 report since 23 March 2020.
-    </div>
-  </div>
 
-  <div class="message-preview">
-    <p>Send this <b>Nirbhaya</b> number to your wife, daughters, sisters, mothers, friends, and all the ladies you know..ask them to save it.. all the men please share with all the ladies you know....
-    <br>In case of emergency.Ladies can send blank msg or can give missed call..so that police will find your location and help u 🌹
-  </div>
+    <footer>
+        <img class="header-logo" src="fclogo-white.svg">
+        <p><a href="about.html">About Fakechecker</a></p>
+        <p><a href="about.html">Community Guidelines</a></p>
+        <p><a href="about.html">Rules for editing</a></p>
+    </footer>
 
-  <a href="nirbhaya-helpline.html" class="whatsapp-button">See more</a>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
 
-</div>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+   https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-database.js"></script>
 
-<div class="whatsapp-message">
-  <div class="alert-inside fake">
-    <div class="text-dark-red bold">
-      <img class="icon20" src="img/false-color.png">This message is fake.
-    </div>
-    <div class="opacity60 smaller">
-      3 reports since 22 March 2020.
-    </div>
-  </div>
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyD30YcwE_5f3rO2QRC25kQ5rEbeWz5zj9Y",
+            authDomain: "fakechecker-bf9fb.firebaseapp.com",
+            databaseURL: "https://fakechecker-bf9fb.firebaseio.com",
+            projectId: "fakechecker-bf9fb",
+            storageBucket: "fakechecker-bf9fb.appspot.com",
+            messagingSenderId: "76875907987",
+            appId: "1:76875907987:web:76fc66053bedbf98e65e66",
+            measurementId: "G-80X57EVT25"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
 
-  <div class="message-preview">
-    <p><b>NASA</b> satellite videos LIVE telecast have shown that the coronavirus is retreating in India thanks to the people's efforts at 5PM on 22 Mar ..
-    <p>The cosmic level sound waves generated have been detected by NASA's <b>SD13</b> wave detector and a recently made bio-satellite has shown COVID-19 strain diminishing and weakening!!!
-    <p><b><i>BIG THANKS TO EVERYONE FOR MAKING THIS A SUCCESS</i></b>
-    <br><b>Proud to be an Indian</b>
-    <br>👏🏽👏🏽👏🏽👏🏽👏🏽
-    <br>Jai Hind 🇮🇳🇮🇳🇮🇳
-  </div>
+        var database = firebase.database();
 
-  <a href="nasa-covid.html" class="whatsapp-button">See more</a>
+        console.log("yo");
 
-</div>
+        const ref = firebase.database().ref('posts');
+        ref.on('value', (snapshot) => {
+            var posts = snapshot.val();
+            for (var i = 0; i < posts.length; i++) {
 
-<div class="whatsapp-message">
-  <div class="alert-inside true">
-    <div class="text-dark-green bold">
-      <img class="icon20" src="img/true-color.png">This message is true.
-    </div>
-    <div class="opacity60 smaller">
-      2 reports since 23 March 2020.
-    </div>
-  </div>
+                var thisCode = "<a href='post.html?" +
+                    i +
+                    "'><div class='post-container'><div class='claim spaced'>" +
+                    posts[i].post_summary +
+                    "</div><div class='reported'> Reported " +
+                    posts[i].report_count +
+                    " times since " +
+                    posts[i].first_report +
+                    ".</div><p class='limited'>" +
+                    posts[i].post_text +
+                    "</div>"
 
-  <div class="message-preview">
-    <p>Finally, A good news is coming from IIT, Delhi.
-    <p>As they invented World's first cheap rate test kit for Corona Virus before USA.
-  </div>
+                document.getElementById('allPostContainer').innerHTML += thisCode;
+            }
+        });
+    </script>
 
-  <a href="iitd-test.html" class="whatsapp-button">See more</a>
 
-</div>
-
-</div>
-
-<script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="script.js"></script>
 </body>
+
 </html>

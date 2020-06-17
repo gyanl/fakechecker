@@ -4,14 +4,13 @@
     <title>Fake Checker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <meta name="theme-color" content="#F97777">
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
 
 <body id="page">
 
     <div class="header bg-header">
-        <a href="https://gyanl.com/fakechecker" class="header-text"><img class="header-logo" src="fclogo.svg"></a>
+        <a href="index.html" class="header-text"><img class="header-logo" src="fclogo.svg"></a>
         <input type="search" class="search" value="Search" onfocus="this.value=''" onblur="this.value='Search'"></input>
     </div>
 
@@ -100,11 +99,15 @@
         </div>
 
 
-        <form>
-            <center>
-                <textarea onfocus="this.value=''" id="commentBox" class="comment-box" rows=4>Comment...</textarea><br>
-            </center>
-            <a id="" onclick="submitComment()" class="button"><i class="icon20" data-feather="send"></i>Post</a>
+        <form class="spaced">
+            <p></p>
+            <div class="improve-label">Post a comment</div>
+            <textarea onfocus="this.value=''" id="commentBox" class="comment-box" rows=4>Comment...</textarea><br>
+
+            <div class="improve-label">Your Name</div>
+            <input class="comment-box" type="text" name="textinput-username" id="commentBox-author" value="guest"><br>
+            <a onfocus="this.value=''" onclick="submitComment()" class="button"><i class="icon20" data-feather="send"></i>Post</a>
+
 
         </form>
 
@@ -112,7 +115,10 @@
     </div>
 
     <footer>
-        Made with love by Gyan
+        <img class="header-logo" src="fclogo-white.svg">
+        <p><a href="about.html">About Fakechecker</a></p>
+        <p><a href="about.html">Community Guidelines</a></p>
+        <p><a href="about.html">Rules for editing</a></p>
     </footer>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -235,7 +241,7 @@
 
             firebase.database().ref('comments/' + currentPostId + '/' + numComments).set({
                 comment: document.getElementById("commentBox").value,
-                author: "guest",
+                author: document.getElementById("commentBox-author").value,
                 timestamp: dateTime
 
             }, function(error) {
@@ -245,6 +251,8 @@
                     console.log("Commented :)");
                 }
             });
+
+            document.getElementById("commentBox").value = "Comment...";
         }
     </script>
 
