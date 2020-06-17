@@ -345,6 +345,33 @@ a.alert.weblink:visited {
     display: inline-block;
 }
 
+.home-status {
+    color: #595d7b;
+    text-align: left;
+}
+
+.home- reported {
+    font-size: 14px;
+    line-height: 24px;
+    text-align: left;
+    letter-spacing: 0.2px;
+    color: #595d7b;
+    opacity: 0.75;
+    padding-bottom: 4px;
+}
+
+.green {
+    color: #2CA782;
+    background: #D9F7EE;
+    border-radius: 12px;
+}
+
+.red {
+    color: #FF726D;
+    background: #FFEFEF;
+    border-radius: 12px;
+}
+
 .button:active {
     transform: translateY(2px);
 }
