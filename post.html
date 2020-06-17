@@ -39,66 +39,70 @@
 
     </div>
 
-    <h3 class="spaced">Factcheck</h3>
-    <p id="post-factcheck" class="spaced"></p>
+    <div id="improve" class="spaced">
+        <h3 class="spaced">Improve Factcheck</h3>
+        <form action="">
+            <p>Suggestions for how this should be.</p>
+
+            <div class="improve-label">Factcheck</div>
+            <textarea class="comment-box" name="textinput-factcheck" id="edit-factcheck" cols="30" rows="10"></textarea><br>
+
+            <div class="improve-label">Source Link</div>
+            <input class="comment-box" type="text" name="textinput-factcheck-link" id="edit-factcheck-link"><br>
+
+            <div class="improve-label">Source Article Title</div>
+            <input class="comment-box" type="text" name="textinput-factcheck-articletitle" id="edit-factcheck-title"><br>
+
+            <div class="improve-label">Source Name</div>
+            <input class="comment-box" type="text" name="textinput-factcheck-sourcename" id="edit-factcheck-sourcename"><br>
+        </form>
+
+        <a id="doneImproveButton" onclick="submitAndHideImprove()" class="button noselect"><i class="icon20" data-feather="check"></i>Submit</a>
+        <a id="cancelImproveButton" onclick="hideImprove()" class="button noselect"><i class="icon20" data-feather="x"></i>Cancel</a>
+    </div>
+
+    <div id="factcheckUI">
+        <h3 class="spaced">Factcheck</h3>
+
+        <p id="post-factcheck" class="spaced"></p>
 
 
-    <textarea id="response">
+        <textarea id="response">
 
   </textarea>
 
 
-    <a id="link" class="alert weblink">
-        <img class="icon20" src="img/web.png">
-        <span id="link-title">...</span>
-        <div class="smaller opacity50 smallcaps"><span id="link-source">...</span><i class="icon16" data-feather="chevron-right"></i></div>
-    </a>
+        <a id="link" class="alert weblink">
+            <img class="icon20" src="img/web.png">
+            <span id="link-title">...</span>
+            <div class="smaller opacity50 smallcaps"><span id="link-source">...</span><i class="icon16" data-feather="chevron-right"></i></div>
+        </a>
 
 
 
-    <div class="spaced">
-        <a class="button noselect" href="whatsapp://send?text=*This message is fake!* There is no evidence of a NASA SD13 wave detector, there's no confirmation from NASA to show that the 5PM clapping did anything to show that the Coronavirus is retreating in India. The number of daily Coronavirus cases are only rising in India, and are expected to rise sharply in the coming days. All of us here in India need to exercise sound personal judgement and stay safe indoors as much as possible. Read more at www.gyanl.com/fakechecker/nasa-covid"
-            data-action="share/whatsapp/share"><i class="icon20" data-feather="share-2"></i>Share on WhatsApp</a>
+        <div class="spaced">
+            <a class="button noselect" href="whatsapp://send?text=*This message is fake!* There is no evidence of a NASA SD13 wave detector, there's no confirmation from NASA to show that the 5PM clapping did anything to show that the Coronavirus is retreating in India. The number of daily Coronavirus cases are only rising in India, and are expected to rise sharply in the coming days. All of us here in India need to exercise sound personal judgement and stay safe indoors as much as possible. Read more at www.gyanl.com/fakechecker/nasa-covid"
+                data-action="share/whatsapp/share"><i class="icon20" data-feather="share-2"></i>Share on WhatsApp</a>
 
-        <a id="copyButton" onclick="copyText()" class="button noselect"><i class="icon20" data-feather="copy"></i><span id="copyButtonText">Copy</span></a>
+            <a id="copyButton" onclick="copyText()" class="button noselect"><i class="icon20" data-feather="copy"></i><span id="copyButtonText">Copy</span></a>
 
-        <a id="editFactcheckButton" onclick="" class="button noselect"><i class="icon20" data-feather="edit"></i>Improve</a>
+            <a id="editFactcheckButton" onclick="showImprove()" class="button noselect"><i class="icon20" data-feather="edit"></i>Improve</a>
 
-        <a id="revisionHistoryButton" onclick="" class="button noselect"><i class="icon20" data-feather="clock"></i>History</a>
+            <a id="revisionHistoryButton" onclick="" class="button noselect"><i class="icon20" data-feather="clock"></i>History</a>
 
+        </div>
     </div>
-
 
     <div class="comment-section">
         <h3 class="spaced">Comments</h3>
         <div id="comments-container">
 
-            <div class="comment-container spaced">
-                People die because the symptoms are so extreme. If relieved the body fights off the disease. I have first hand experience from the period between Jan 30 and March 22.
-                <div class="comment-metadata">
-                    rishabh • 8m ago
-                </div>
-            </div>
-
-            <div class="comment-container spaced">
-                People die because the symptoms are so extreme. If relieved the body fights off the disease. I have first hand experience from the period between Jan 30 and March 22.
-                <div class="comment-metadata">
-                    rishabh • 8m ago
-                </div>
-            </div>
-
-            <div class="comment-container spaced">
-                People die because the symptoms are so extreme. If relieved the body fights off the disease. I have first hand experience from the period between Jan 30 and March 22.
-                <div class="comment-metadata">
-                    rishabh • 8m ago
-                </div>
-            </div>
         </div>
 
 
         <form>
             <center>
-                <textarea id="commentBox" class="comment-box" rows=4>Comment...</textarea><br>
+                <textarea onfocus="this.value=''" id="commentBox" class="comment-box" rows=4>Comment...</textarea><br>
             </center>
             <a id="" onclick="submitComment()" class="button"><i class="icon20" data-feather="send"></i>Post</a>
 
@@ -150,12 +154,6 @@
         const ref = firebase.database().ref('posts/' + currentPostId);
         ref.on('value', (snapshot) => {
 
-            function getStatus() {
-                var a = 10;
-                var b = 5;
-                console.log(Math.max(a, b));
-            }
-
             function fillPage() {
                 document.getElementById("post-summary").innerHTML = snapshot.val().post_summary;
                 document.getElementById("report-count").innerHTML = snapshot.val().report_count;
@@ -168,6 +166,12 @@
                 document.getElementById("link-source").innerHTML = snapshot.val().link_source;
                 // document.getElementById("link-favicon").innerHTML = snapshot.val().link_favicon;
 
+                // Edit area
+                document.getElementById("edit-factcheck").value = snapshot.val().post_factcheck;
+                document.getElementById("edit-factcheck-link").value = snapshot.val().link;
+                document.getElementById("edit-factcheck-title").value = snapshot.val().link_title;
+                document.getElementById("edit-factcheck-sourcename").value = snapshot.val().link_source;
+
                 document.getElementById("response").innerHTML = snapshot.val().post_factcheck + "\nRead more at www.gyanl.com/fakechecker/post.html?" + currentPostId;
 
                 document.getElementById("page").style.opacity = "1";
@@ -176,6 +180,35 @@
             fillPage();
             getStatus();
         });
+
+        function showImprove() {
+            document.getElementById("improve").style.display = "block";
+            document.getElementById("factcheckUI").style.display = "none";
+        }
+
+        function hideImprove() {
+            document.getElementById("improve").style.display = "none";
+            document.getElementById("factcheckUI").style.display = "block";
+        }
+
+        function submitAndHideImprove() {
+
+            firebase.database().ref('posts/' + currentPostId).update({
+                post_factcheck: document.getElementById("edit-factcheck").value,
+                link: document.getElementById("edit-factcheck-link").value,
+                link_title: document.getElementById("edit-factcheck-title").value,
+                link_source: document.getElementById("edit-factcheck-sourcename").value
+
+            }, function(error) {
+                if (error) {
+                    console.log("Improve failed...");
+                } else {
+                    console.log("Improved :)");
+                }
+            });
+            hideImprove();
+        }
+
 
 
         const cmts = firebase.database().ref('comments/' + currentPostId);
@@ -207,7 +240,7 @@
 
             }, function(error) {
                 if (error) {
-                    console.log("The write failed...");
+                    console.log("Comment failed...");
                 } else {
                     console.log("Commented :)");
                 }
