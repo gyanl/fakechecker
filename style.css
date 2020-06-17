@@ -145,6 +145,11 @@ input[type="search"] {
     font-size: 14px;
 }
 
+#alert {
+    margin-top: 20px;
+    opacity: .75;
+}
+
 
 /* Alert boxes and themes */
 

@@ -35,8 +35,11 @@
     <p></p>
     <div class="comment-section">
 
-        <h3 class="spaced">Have a few minutes? Help us fact-check some of these claims.</h3>
-        <p></p>
+        <center>
+            <h3 class="spaced">Have a few minutes?</h3>
+            <p class="spaced">Help us fact-check some of these claims.</p>
+            <p></p>
+        </center>
 
         <center id="allPostContainer">
 
@@ -90,10 +93,17 @@
             console.log(numPosts);
             for (var i = 0; i < posts.length; i++) {
 
+                var thisSummary = '';
+                if (posts[i].post_summary) {
+                    thisSummary = posts[i].post_summary;
+                } else {
+                    thisSummary = "No summary"
+                }
+
                 var thisCode = "<a href='post.html?" +
                     i +
                     "'><div class='home-post-container'><div class='claim spaced'>" +
-                    posts[i].post_summary +
+                    thisSummary +
                     "</div><div class='reported'> Reported " +
                     posts[i].report_count +
                     " times since " +

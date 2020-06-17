@@ -38,10 +38,12 @@
 
     </div>
 
+    <div id="alert" class="spaced"></div>
+
     <div id="improve" class="spaced">
-        <h3 class="spaced">Edit Factcheck</h3>
+        <h3>Edit Factcheck</h3>
         <form action="">
-            <p>Fact-checks should explain why the information in the post is true or false in simple terms. You can provide a link to other resources like fact-checking sites, news sites, or published research for further reading. </p>
+            <p class="no-top-margin">Fact-checks should explain why the information in the post is true or false in simple terms. You can provide a link to other resources like fact-checking sites, news sites, or published research for further reading. </p>
 
             <div class="improve-label">Factcheck</div>
             <textarea class="comment-box" placeholder="Why is this information true or false?" name="textinput-factcheck" id="edit-factcheck" cols="30" rows="10"></textarea><br>
@@ -85,9 +87,9 @@
 
             <a id="copyButton" onclick="copyText()" class="button noselect"><i class="icon20" data-feather="copy"></i><span id="copyButtonText">Copy</span></a>
 
-            <a id="editFactcheckButton" onclick="showImprove()" class="button noselect"><i class="icon20" data-feather="edit"></i>Improve</a>
+            <a id="editFactcheckButton" onclick="showImprove()" class="button noselect"><i class="icon20" data-feather="edit"></i>Edit</a>
 
-            <a id="revisionHistoryButton" onclick="" class="button noselect"><i class="icon20" data-feather="clock"></i>History</a>
+            <!-- <a id="revisionHistoryButton" onclick="" class="button noselect"><i class="icon20" data-feather="clock"></i>History</a> -->
 
         </div>
     </div>
@@ -102,11 +104,11 @@
         <form class="spaced">
             <p></p>
             <div class="improve-label">Post a comment</div>
-            <textarea onfocus="this.value=''" id="commentBox" class="comment-box" rows=4>Comment...</textarea><br>
+            <textarea placeholder="Comment..." onfocus="this.value=''" id="commentBox" class="comment-box" rows=4></textarea><br>
 
             <div class="improve-label">Your Name</div>
             <input class="comment-box" type="text" name="textinput-username" id="commentBox-author" value="guest"><br>
-            <a onfocus="this.value=''" onclick="submitComment()" class="button"><i class="icon20" data-feather="send"></i>Post</a>
+            <a onclick="submitComment()" class="button"><i class="icon20" data-feather="send"></i>Post</a>
 
 
         </form>
@@ -195,7 +197,11 @@
 
                 if (snapshot.val().post_factcheck) {
                     document.getElementById("post-factcheck").innerHTML = snapshot.val().post_factcheck;
+                    document.getElementById("edit-factcheck").value = snapshot.val().post_factcheck;
                 } else {
+                    document.getElementById("post-factcheck").innerHTML = "No fact-check available. Click the edit button to add information."
+
+                    document.getElementById("alert").innerHTML = "Thank you for reporting this information. We have added it to our database. <p>There is no fact-check currently available, so you can help others by adding a fact-check below, or check in later to see if someone else has added information."
                     showImprove();
                 }
 
@@ -205,19 +211,18 @@
 
                 // Edit area
                 if (snapshot.val().link) {
-                    document.getElementById("edit-factcheck").href = snapshot.val().link;
-                }
-
-                if (snapshot.val().link) {
-                    document.getElementById("edit-factcheck-link").href = snapshot.val().link;
+                    document.getElementById("edit-factcheck-link").value = snapshot.val().link;
+                    document.getElementById("link").href = snapshot.val().link;
+                } else {
+                    document.getElementById("link").style.display = 'none';
                 }
 
                 if (snapshot.val().link_title) {
-                    document.getElementById("edit-factcheck-title").href = snapshot.val().link_title;
+                    document.getElementById("edit-factcheck-title").value = snapshot.val().link_title;
                 }
 
                 if (snapshot.val().link_source) {
-                    document.getElementById("edit-factcheck-sourcename").href = snapshot.val().link_source;
+                    document.getElementById("edit-factcheck-sourcename").value = snapshot.val().link_source;
                 }
 
                 document.getElementById("response").innerHTML = snapshot.val().post_factcheck + "\nRead more at www.gyanl.com/fakechecker/post.html?" + currentPostId;
