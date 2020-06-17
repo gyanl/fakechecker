@@ -1,0 +1,171 @@
+<html>
+
+<head>
+  <title>Fake Checker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta name="theme-color" content="#F97777">
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body id="page">
+
+  <div class="header bg-header">
+    <a href="https://gyanl.com/fakechecker" class="header-text"><img class="header-logo" src="fclogo.svg"></a>
+    <input type="search" class="search" value="Search" onfocus="this.value=''" onblur="this.value='Search'"></input>
+  </div>
+
+
+  <center>
+    <div class="status-tile misleading">
+      <i class="icon20" data-feather="info"></i><span id="verification-status">Misleading</span>
+    </div>
+  </center>
+
+  <div class="claim spaced">
+    <span id="post-summary"></span>
+  </div>
+
+  <div class="reported">
+    Reported <span id="report-count">0</span> times since <span id="first-report">1 January 2020</span>.
+  </div>
+
+
+  <div class="post-container">
+    <p id="post-text" class="limited">...</p>
+
+      <a id="expandPost" onclick="expandPost()" class="button noselect"><i class="icon20" data-feather="maximize-2"></i><span id="readMoreText">Read more</span></a>
+      <a id="showVariants" onclick="" class="button noselect"><i class="icon20" data-feather="layers"></i>3 Variants</a>
+
+  </div>
+
+  <h3 class="spaced">Factcheck</h3>
+  <p id="post-factcheck" class="spaced"></p>
+
+
+  <textarea id="response">
+
+  </textarea>
+
+
+  <a id="link" class="alert weblink">
+    <img class="icon20" src="img/web.png">
+    <span id="link-title">...</span>
+    <div class="smaller opacity50 smallcaps"><span id="link-source">...</span><i class="icon16" data-feather="chevron-right"></i></div>
+  </a>
+
+
+
+  <div class="spaced">
+    <a class="button noselect"
+      href="whatsapp://send?text=*This message is fake!* There is no evidence of a NASA SD13 wave detector, there's no confirmation from NASA to show that the 5PM clapping did anything to show that the Coronavirus is retreating in India. The number of daily Coronavirus cases are only rising in India, and are expected to rise sharply in the coming days. All of us here in India need to exercise sound personal judgement and stay safe indoors as much as possible. Read more at www.gyanl.com/fakechecker/nasa-covid"
+      data-action="share/whatsapp/share"><i class="icon20" data-feather="share-2"></i>Share on WhatsApp</a>
+
+    <a id="copyButton" onclick="copyText()" class="button noselect"><i class="icon20" data-feather="copy"></i><span id="copyButtonText">Copy</span></a>
+
+    <a id="editFactcheckButton" onclick="" class="button noselect"><i class="icon20" data-feather="edit"></i>Improve</a>
+
+    <a id="revisionHistoryButton" onclick="" class="button noselect"><i class="icon20" data-feather="clock"></i>History</a>
+
+  </div>
+
+
+  <div class="comment-section">
+    <h3 class="spaced">Comments</h3>
+
+    <div class="comment-container spaced">
+      People die because the symptoms are so extreme. If relieved the body fights off the disease. I have first hand experience from the period between Jan 30 and March 22.
+      <div class="comment-metadata">
+        rishabh • 8m ago
+      </div>
+    </div>
+
+    <div class="comment-container spaced">
+      People die because the symptoms are so extreme. If relieved the body fights off the disease. I have first hand experience from the period between Jan 30 and March 22.
+      <div class="comment-metadata">
+        rishabh • 8m ago
+      </div>
+    </div>
+
+    <div class="comment-container spaced">
+      People die because the symptoms are so extreme. If relieved the body fights off the disease. I have first hand experience from the period between Jan 30 and March 22.
+      <div class="comment-metadata">
+        rishabh • 8m ago
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Made with love by Gyan
+  </footer>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-database.js"></script>
+
+  <script>
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyD30YcwE_5f3rO2QRC25kQ5rEbeWz5zj9Y",
+      authDomain: "fakechecker-bf9fb.firebaseapp.com",
+      databaseURL: "https://fakechecker-bf9fb.firebaseio.com",
+      projectId: "fakechecker-bf9fb",
+      storageBucket: "fakechecker-bf9fb.appspot.com",
+      messagingSenderId: "76875907987",
+      appId: "1:76875907987:web:76fc66053bedbf98e65e66",
+      measurementId: "G-80X57EVT25"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    var database = firebase.database();
+    
+    var currentPostId = location.search.substring(1);
+    console.log(currentPostId);
+
+
+const ref = firebase.database().ref('posts/' + currentPostId);
+ref.on('value', (snapshot) => {
+
+  function getStatus() {
+    var a=10;
+    var b=5;
+    console.log(Math.max(a, b));
+  }
+
+  function fillPage() {
+      document.getElementById("post-summary").innerHTML = snapshot.val().post_summary;
+      document.getElementById("report-count").innerHTML = snapshot.val().report_count;
+      document.getElementById("first-report").innerHTML = snapshot.val().first_report;
+      document.getElementById("post-text").innerHTML = snapshot.val().post_text;
+      document.getElementById("post-factcheck").innerHTML = snapshot.val().post_factcheck;
+
+      document.getElementById("link").href = snapshot.val().link;
+      document.getElementById("link-title").innerHTML = snapshot.val().link_title;
+      document.getElementById("link-source").innerHTML = snapshot.val().link_source;
+      // document.getElementById("link-favicon").innerHTML = snapshot.val().link_favicon;
+
+      document.getElementById("response").innerHTML = snapshot.val().post_factcheck + "\nRead more at www.gyanl.com/fakechecker/post.html?" + currentPostId;
+
+      document.getElementById("page").style.opacity = "1";
+    }
+
+fillPage();
+getStatus();
+});
+
+
+  </script>
+
+
+  <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>
