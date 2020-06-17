@@ -22,7 +22,7 @@
     </center>
 
     <div class="claim spaced">
-        <span onclick="this.contentEditable = 'true';" onblur="setSummary()" id="post-summary"></span>
+        <span onclick="this.contentEditable = 'true'; this.classList.add('comment-box')" onblur="setSummary();this.classList.remove('comment-box') " id="post-summary"></span>
     </div>
 
     <div class="reported">
