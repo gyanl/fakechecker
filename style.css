@@ -175,6 +175,11 @@ input[type="search"] {
     border: 1px solid #fff4e8;
 }
 
+.fabricated {
+    background: #FF726D;
+    color: #ffffff;
+}
+
 .dontknow {
     background: #f1f4f5;
     border: 1px solid #7397a0;
@@ -255,6 +260,23 @@ a.alert.weblink:visited {
     box-shadow: 0px 0px 4px rgba(70, 136, 241, 0.2);
     border-radius: 4px;
     padding: 0 16px 0px 16px;
+}
+
+#allPostContainer {
+    padding: 0 10%;
+}
+
+.home-post-container {
+    display: inline-block;
+    max-width: 400px;
+    margin: 8px 12px;
+    background: #ffffff;
+    color: #2a3134;
+    /* Dark 25% */
+    border: 0.5px solid rgba(10, 48, 65, 0.25);
+    box-shadow: 0px 0px 4px rgba(70, 136, 241, 0.2);
+    border-radius: 4px;
+    padding: 8px 20px;
 }
 
 .limited {
@@ -432,6 +454,13 @@ footer a {
     .post-container {
         max-width: 90%;
         margin: 8px 5% 0 5%;
+    }
+    #allPostContainer {
+        padding: 0;
+    }
+    .home-post-container {
+        max-width: auto;
+        margin: 0px 5% 16px 5%;
     }
     .weblink {
         max-width: 80%;

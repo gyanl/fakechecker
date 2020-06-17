@@ -16,13 +16,13 @@
 
 
     <center>
-        <div class="status-tile misleading">
-            <i class="icon20" data-feather="info"></i><span id="verification-status">Misleading</span>
+        <div class="status-tile fabricated">
+            <i class="icon20" data-feather="info"></i><span id="verification-status">False</span>
         </div>
     </center>
 
     <div class="claim spaced">
-        <span id="post-summary"></span>
+        <span onclick="this.contentEditable = 'true';" onblur="setSummary()" id="post-summary"></span>
     </div>
 
     <div class="reported">
@@ -39,21 +39,21 @@
     </div>
 
     <div id="improve" class="spaced">
-        <h3 class="spaced">Improve Factcheck</h3>
+        <h3 class="spaced">Edit Factcheck</h3>
         <form action="">
-            <p>Suggestions for how this should be.</p>
+            <p>Fact-checks should explain why the information in the post is true or false in simple terms. You can provide a link to other resources like fact-checking sites, news sites, or published research for further reading. </p>
 
             <div class="improve-label">Factcheck</div>
-            <textarea class="comment-box" name="textinput-factcheck" id="edit-factcheck" cols="30" rows="10"></textarea><br>
+            <textarea class="comment-box" placeholder="Why is this information true or false?" name="textinput-factcheck" id="edit-factcheck" cols="30" rows="10"></textarea><br>
 
             <div class="improve-label">Source Link</div>
-            <input class="comment-box" type="text" name="textinput-factcheck-link" id="edit-factcheck-link"><br>
+            <input class="comment-box" placeholder="Link to a news website or other source." type="text" name="textinput-factcheck-link" id="edit-factcheck-link"><br>
 
             <div class="improve-label">Source Article Title</div>
-            <input class="comment-box" type="text" name="textinput-factcheck-articletitle" id="edit-factcheck-title"><br>
+            <input class="comment-box" placeholder="Title of the article" type="text" name="textinput-factcheck-articletitle" id="edit-factcheck-title"><br>
 
             <div class="improve-label">Source Name</div>
-            <input class="comment-box" type="text" name="textinput-factcheck-sourcename" id="edit-factcheck-sourcename"><br>
+            <input class="comment-box" placeholder="Name of the source" type="text" name="textinput-factcheck-sourcename" id="edit-factcheck-sourcename"><br>
         </form>
 
         <a id="doneImproveButton" onclick="submitAndHideImprove()" class="button noselect"><i class="icon20" data-feather="check"></i>Submit</a>
@@ -155,28 +155,70 @@
 
         var numComments = 0;
 
+        function setSummary() {
+            if (document.getElementById("post-summary").innerHTML != 'Click to add a summary.') {
+
+                firebase.database().ref('posts/' + currentPostId).update({
+
+                    post_summary: document.getElementById("post-summary").innerHTML
+
+                }, function(error) {
+                    if (error) {
+                        console.log("Summary update failed...");
+                    } else {
+                        console.log("Summary improved :)");
+                    }
+                });
+                hideImprove();
+            }
+        }
+
+
+
+
 
 
         const ref = firebase.database().ref('posts/' + currentPostId);
         ref.on('value', (snapshot) => {
 
             function fillPage() {
-                document.getElementById("post-summary").innerHTML = snapshot.val().post_summary;
+                if (snapshot.val().post_summary) {
+                    document.getElementById("post-summary").innerHTML = snapshot.val().post_summary;
+                } else {
+                    document.getElementById("post-summary").innerHTML = "Click to add a summary."
+                }
+
                 document.getElementById("report-count").innerHTML = snapshot.val().report_count;
                 document.getElementById("first-report").innerHTML = snapshot.val().first_report;
                 document.getElementById("post-text").innerHTML = snapshot.val().post_text;
-                document.getElementById("post-factcheck").innerHTML = snapshot.val().post_factcheck;
 
-                document.getElementById("link").href = snapshot.val().link;
+
+                if (snapshot.val().post_factcheck) {
+                    document.getElementById("post-factcheck").innerHTML = snapshot.val().post_factcheck;
+                } else {
+                    showImprove();
+                }
+
                 document.getElementById("link-title").innerHTML = snapshot.val().link_title;
                 document.getElementById("link-source").innerHTML = snapshot.val().link_source;
                 // document.getElementById("link-favicon").innerHTML = snapshot.val().link_favicon;
 
                 // Edit area
-                document.getElementById("edit-factcheck").value = snapshot.val().post_factcheck;
-                document.getElementById("edit-factcheck-link").value = snapshot.val().link;
-                document.getElementById("edit-factcheck-title").value = snapshot.val().link_title;
-                document.getElementById("edit-factcheck-sourcename").value = snapshot.val().link_source;
+                if (snapshot.val().link) {
+                    document.getElementById("edit-factcheck").href = snapshot.val().link;
+                }
+
+                if (snapshot.val().link) {
+                    document.getElementById("edit-factcheck-link").href = snapshot.val().link;
+                }
+
+                if (snapshot.val().link_title) {
+                    document.getElementById("edit-factcheck-title").href = snapshot.val().link_title;
+                }
+
+                if (snapshot.val().link_source) {
+                    document.getElementById("edit-factcheck-sourcename").href = snapshot.val().link_source;
+                }
 
                 document.getElementById("response").innerHTML = snapshot.val().post_factcheck + "\nRead more at www.gyanl.com/fakechecker/post.html?" + currentPostId;
 

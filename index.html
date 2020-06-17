@@ -38,42 +38,9 @@
         <h3 class="spaced">Have a few minutes? Help us fact-check some of these claims.</h3>
         <p></p>
 
-        <div id="allPostContainer">
+        <center id="allPostContainer">
 
-        </div>
-
-        <div class="whatsapp-message">
-            <div class="alert-inside fake">
-                <div class="text-dark-red bold">
-                    <img class="icon20" src="img/false-color.png">This message is fake.
-                </div>
-                <div class="opacity60 smaller">
-                    1 report since 1 April 2020.
-                </div>
-            </div>
-
-            <div class="message-preview">
-                <p>People in Italy have thrown all of their money on the roads outside saying that this money is useless to save them from death. If you are well off spend this for the service and help of the needy.lesson for humanity.</p>
-            </div>
-
-            <a href="money-streets.html" class="whatsapp-button">See more</a>
-
-        </div>
-
-
-
-        <div class="post-container">
-            <div class="claim spaced">
-                <span id="post-summary"></span>
-            </div>
-
-            <div class="reported">
-                Reported <span id="report-count">0</span> times since <span id="first-report">1 January 2020</span>.
-            </div>
-            <p id="post-text" class="limited">...</p>
-
-            <a id="expandPost" onclick="expandPost()" class="button noselect"><i class="icon20" data-feather="maximize-2"></i><span id="readMoreText">Read more</span></a>
-        </div>
+        </center>
 
     </div>
 
@@ -110,16 +77,22 @@
 
         var database = firebase.database();
 
-        console.log("yo");
+        var numPosts = 0;
 
         const ref = firebase.database().ref('posts');
         ref.on('value', (snapshot) => {
             var posts = snapshot.val();
+            numPosts = posts.length;
+
+            document.getElementById('allPostContainer').innerHTML = '';
+
+
+            console.log(numPosts);
             for (var i = 0; i < posts.length; i++) {
 
                 var thisCode = "<a href='post.html?" +
                     i +
-                    "'><div class='post-container'><div class='claim spaced'>" +
+                    "'><div class='home-post-container'><div class='claim spaced'>" +
                     posts[i].post_summary +
                     "</div><div class='reported'> Reported " +
                     posts[i].report_count +
@@ -132,6 +105,30 @@
                 document.getElementById('allPostContainer').innerHTML += thisCode;
             }
         });
+
+        function submitNewPost() {
+
+            var today = new Date();
+            var month = today.toLocaleString('default', {
+                month: 'long'
+            });
+            var date = today.getDate() + ' ' + month + ' ' + today.getFullYear();
+
+            firebase.database().ref('posts/' + numPosts).update({
+                post_text: document.getElementById("new-post").value,
+                first_report: date,
+                report_count: "1"
+
+            }, function(error) {
+                if (error) {
+                    console.log("New Post failed failed...");
+                } else {
+                    console.log("Posted :)");
+                }
+            });
+
+            window.location.href = '/post.html?' + (numPosts - 1);
+        }
     </script>
 
 
