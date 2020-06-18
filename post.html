@@ -215,6 +215,8 @@
                     document.getElementById("editFactcheckButton").style.display = "none";
                     document.getElementById("copyButton").style.display = "none";
                     document.getElementById("whatsappButton").style.display = "none";
+                    document.getElementById("whatsappButton").href = "whatsapp://send?text=" + snapshot.val().post_factcheck;
+
                 }
 
                 document.getElementById("link-title").innerHTML = snapshot.val().link_title;

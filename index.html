@@ -16,15 +16,15 @@
 
     <div class="landing">
 
-        <img class="headerimg" src="img/header.jpg" alt="">
+        <img class="headerimg" src="img/header.png" alt="">
 
         <div class="landing-text spaced">
             <h3>Not everything you read on the internet is true.</h3>
-            <p class="no-top-margin">Fakechecker is a crowdsourced fact-checking initiative. Paste in a forwarded message or upload a media file to check if it's true.</p>
-            <p>If we don’t have any information about it, you can help others by adding some information about it and our community will fact-check it.</p>
+            <p class="no-top-margin">Fakechecker is a crowdsourced fact-checking initiative. You can paste in a suspicious post or forwarded message, and other users can fact-check to see if it's true.</p>
+            <p>You can also help others by adding information like summaries, fact-checks or links related to posts you or other users have submitted.</p>
 
             <div class="improve-label">Saw a suspicious message or post? Paste it here!</div>
-            <textarea class="comment-box" name="textinput-newpost" onfocus="this.value=''" id="new-post" cols="30" rows="5">Paste a message or post</textarea><br>
+            <textarea placeholder="Paste a message or post" class="comment-box" name="textinput-newpost" id="new-post" cols="30" rows="5"></textarea><br>
             <a id="" onclick="submitNewPost()" class="button"><i class="icon20" data-feather="search"></i>Submit & Search</a>
 
             <p>You can also forward a message to us on WhatsApp and you will automatically get a factcheck on the message.</p>
@@ -41,9 +41,9 @@
             <p></p>
         </center>
 
-        <div id="allPostContainer">
+        <center id="allPostContainer">
 
-        </div>
+        </center>
 
         <footer>
             <img class="header-logo" src="fclogo-white.svg">
@@ -89,7 +89,7 @@
 
 
                 console.log(numPosts);
-                for (var i = 0; i < posts.length; i++) {
+                for (var i = posts.length - 1; i > -1; i--) {
 
                     var thisSummary = '';
                     if (posts[i].post_summary) {
