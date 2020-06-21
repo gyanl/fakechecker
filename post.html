@@ -44,6 +44,49 @@
 
     </div>
 
+    <h3 class="spaced">Do you think this message is fake?</h3>
+    <p class="spaced">People like you help power Factchecker!</p>
+
+    <div class="vote-option-container">
+
+        <div onclick="voteTrue()" class=vote-option id="vote-true">
+            <img id="true-svg" class="vote-icon" src="img/true.svg">
+            <div class="vote-text">
+                <p class="vote-type">True</p>
+                <span id="vote-true-num" class="num-votes">0 votes</span>
+            </div>
+
+        </div>
+
+        <div onclick="voteMisleading()" class=vote-option id="vote-misleading">
+            <img id="misleading-svg" class="vote-icon" src="img/misleading.svg">
+            <div class="vote-text">
+                <p class="vote-type">Misleading</p>
+                <span id="vote-misleading-num" class="num-votes">0 votes</span>
+            </div>
+        </div>
+
+        <div onclick="votePartlyFake()" class=vote-option id="vote-partlyfake">
+            <img id="partlyfake-svg" class="vote-icon" src="img/dontknow.svg">
+            <div class="vote-text">
+                <p class="vote-type">Partly fake</p>
+                <span id="vote-partlyfake-num" class="num-votes">0 votes</span>
+            </div>
+        </div>
+
+        <div onclick="voteFake()" class=vote-option id="vote-fake">
+            <img id="fake-svg" class="vote-icon" src="img/false.svg">
+            <div class="vote-text">
+                <p class="vote-type">Fake</p>
+                <span id="vote-fake-num" class="num-votes">0 votes</span>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
     <div id="improve" class="spaced">
         <h3>Edit Factcheck</h3>
         <form action="">
@@ -161,6 +204,10 @@
 
 
         var numComments = 0;
+        var numTrue = 1;
+        var numMisleading = 2;
+        var numPartlyFake = 3;
+        var numFake = 4;
 
         function setSummary() {
             if (document.getElementById("post-summary").innerHTML != 'Click to add a summary.') {
@@ -181,10 +228,6 @@
         }
 
 
-
-
-
-
         const ref = firebase.database().ref('posts/' + currentPostId);
         ref.on('value', (snapshot) => {
 
@@ -198,6 +241,38 @@
                 document.getElementById("report-count").innerHTML = snapshot.val().report_count;
                 document.getElementById("first-report").innerHTML = snapshot.val().first_report;
                 document.getElementById("post-text").innerHTML = snapshot.val().post_text;
+
+                if (snapshot.val().vote_true) {
+                    numTrue = snapshot.val().vote_true;
+                    console.log("Some True Votes");
+                } else {
+                    numTrue = 0;
+                    console.log("No True Votes");
+                }
+
+                if (snapshot.val().vote_misleading) {
+                    numMisleading = snapshot.val().vote_misleading;
+                } else {
+                    numMisleading = 0;
+                    console.log("No Misleading Votes");
+                }
+
+                if (snapshot.val().vote_partlyfake) {
+                    numPartlyFake = snapshot.val().vote_partlyfake;
+                } else {
+                    numPartlyFake = 0;
+                }
+
+                if (snapshot.val().vote_fake) {
+                    numFake = snapshot.val().vote_fake;
+                } else {
+                    numFake = 0;
+                }
+
+                document.getElementById("vote-true-num").innerHTML = numTrue + " votes";
+                document.getElementById("vote-misleading-num").innerHTML = numMisleading + " votes";
+                document.getElementById("vote-partlyfake-num").innerHTML = numPartlyFake + " votes";
+                document.getElementById("vote-fake-num").innerHTML = numFake + " votes";
 
 
                 if (snapshot.val().post_factcheck) {
@@ -247,6 +322,79 @@
             fillPage();
             getStatus();
         });
+
+        function voteTrue() {
+
+            var votes = numTrue + 1;
+
+            firebase.database().ref('posts/' + currentPostId).update({
+                vote_true: votes
+
+            }, function(error) {
+                if (error) {
+                    console.log("Failed to vote True...");
+                } else {
+                    console.log("Voted True :)");
+                }
+            });
+
+            document.getElementById("true-svg").src = "img/true-color.svg";
+        }
+
+        function voteMisleading() {
+
+            var votes = numMisleading + 1;
+
+            firebase.database().ref('posts/' + currentPostId).update({
+                vote_misleading: votes
+
+            }, function(error) {
+                if (error) {
+                    console.log("Failed to vote Misleading...");
+                } else {
+                    console.log("Voted Misleading :)");
+                }
+            });
+            document.getElementById("misleading-svg").src = "img/misleading-color.svg";
+
+        }
+
+        function votePartlyFake() {
+
+            var votes = numPartlyFake + 1;
+
+            firebase.database().ref('posts/' + currentPostId).update({
+                vote_partlyfake: votes
+
+            }, function(error) {
+                if (error) {
+                    console.log("Failed to vote Partly Fake...");
+                } else {
+                    console.log("Voted Partly Fake :)");
+                }
+            });
+            document.getElementById("partlyfake-svg").src = "img/dontknow-color.svg";
+
+        }
+
+        function voteFake() {
+
+            var votes = numFake + 1;
+
+            firebase.database().ref('posts/' + currentPostId).update({
+                vote_fake: votes
+
+            }, function(error) {
+                if (error) {
+                    console.log("Failed to vote Fake...");
+                } else {
+                    console.log("Voted Fake :)");
+                }
+            });
+            document.getElementById("fake-svg").src = "img/false-color.svg";
+
+
+        }
 
         function showImprove() {
             document.getElementById("improve").style.display = "block";
