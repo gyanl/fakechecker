@@ -567,7 +567,8 @@ footer a {
     padding: 4px 8px 4px 4px;
 }
 
-#vote-true:hover {
+
+/* #vote-true:hover {
     background: #b6eddc;
 }
 
@@ -581,7 +582,7 @@ footer a {
 
 #vote-fake:hover {
     background: #fdc9c9;
-}
+} */
 
 @media only screen and (max-width: 768px) {
     .whatsapp-image {
